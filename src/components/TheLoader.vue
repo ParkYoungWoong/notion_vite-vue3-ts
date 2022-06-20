@@ -29,10 +29,6 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
-    transparent: {
-      type: Boolean,
-      default: false
-    },
     padding: {
       type: String,
       default: '0'

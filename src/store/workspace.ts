@@ -102,9 +102,9 @@ export const useWorkspaceStore = defineStore('workspace', {
       this.readWorkspaces()
       // 현재 보이는 워크스페이스 페이지를 삭제한 경우, 
       // 가지고 있는 가장 첫 번째 워크스페이스 페이지로 이동!
-      if (id === this.$router.currentRoute.value.params.id) {
-        this.$router.push(`/workspaces/${this.workspaces[0].id}`)
-      }
+      // if (id === this.$router.currentRoute.value.params.id) {
+      //   this.$router.push(`/workspaces/${this.workspaces[0].id}`)
+      // }
     },
     async rollbackWorkspace() {
       await request({

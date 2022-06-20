@@ -22,7 +22,7 @@
         </div>
         <div
           class="icon"
-          @click.stop="workspaceStore.deleteWorkspace(workspace.id)">
+          @click.stop="deleteWorkspace">
           <i class="fa-solid fa-trash-can"></i>
         </div>
       </div>
@@ -88,6 +88,12 @@ export default defineComponent({
         parentId: this.workspace.id 
       })
       this.showChildren = true
+    },
+    async deleteWorkspace() {
+      await this.workspaceStore.deleteWorkspace(this.workspace.id)
+      if (this.workspace.id === this.$route.params.id) {
+        this.$router.push(`/workspaces/${this.workspaceStore.workspaces[0].id}`)
+      }
     }
   }
 })

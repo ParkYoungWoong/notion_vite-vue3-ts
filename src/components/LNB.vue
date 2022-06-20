@@ -4,9 +4,9 @@
     :style="{ width: `${navWidth}px` }">
     <div class="header">
       <div class="user-profile"></div>
-      <div class="title">
+      <h2 class="title">
         Heropy's Notion
-      </div>
+      </h2>
       <TheLoader
         :loading="workspaceStore.loading"
         class="loader" />

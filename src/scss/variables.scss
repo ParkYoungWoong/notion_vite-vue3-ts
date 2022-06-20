@@ -1,0 +1,10 @@
+@use "sass:color";
+
+$color-font: #333;
+$color-background: #f7f5f3;
+$color-background--hover1: color.adjust($color-background, $lightness: -6%); // darken()
+$color-background--hover2: color.adjust($color-background, $lightness: -12%);
+$color-background--hover3: color.adjust($color-background, $lightness: -18%);
+$color-border: #e2e1dd;
+$color-icon: #99958A;
+$color-highlight: #F86A05;

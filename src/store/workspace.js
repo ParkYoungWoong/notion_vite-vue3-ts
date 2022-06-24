@@ -1,44 +1,19 @@
 import { defineStore } from 'pinia'
 
-interface Workspace {
-  id: string
-  title: string
-  content: string
-  poster: string | null // URL
-  createdAt?: string
-  updatedAt?: string
-  children?: Workspace[]
-}
-interface WorkspaceParamsForUpdate {
-  id?: string
-  parentId?: string
-  title?: string
-  content?: string
-  poster?: string // base64
-}
-
 export const useWorkspaceStore = defineStore('workspace', {
   state: () => {
-    const workspace: Workspace = {
-      id: '',
-      title: '',
-      content: '',
-      poster: null
-    }
-    const workspaces: Workspace[] = []
-    const currentWorkspacePath: Workspace[] = []
     return {
-      workspace,
-      workspaces,
+      workspace: {},
+      workspaces: [],
       workspacesLoaded: false,
-      currentWorkspacePath,
+      currentWorkspacePath: [],
       backedUpWorkspaceId: '',
       loading: false
     }
   },
   actions: {
     // C
-    async createWorkspace(payload: WorkspaceParamsForUpdate = {}) {
+    async createWorkspace(payload = {}) {
       const { parentId } = payload
       const workspace = await request({
         method: 'POST',
@@ -64,7 +39,7 @@ export const useWorkspaceStore = defineStore('workspace', {
         this.createWorkspace()
       }
     },
-    async readWorkspace(id: string) {
+    async readWorkspace(id) {
       const workspace = await request({
         method: 'GET',
         id
@@ -73,7 +48,7 @@ export const useWorkspaceStore = defineStore('workspace', {
       this.workspace = workspace
     },
     // U
-    async updateWorkspace(payload: WorkspaceParamsForUpdate) {
+    async updateWorkspace(payload) {
       const { id, title, content, poster, parentId } = payload
       const updatedWorkspace = await request({
         id,
@@ -93,7 +68,7 @@ export const useWorkspaceStore = defineStore('workspace', {
       }
     },
     // D
-    async deleteWorkspace(id: string) {
+    async deleteWorkspace(id) {
       await request({
         id,
         method: 'DELETE'
@@ -114,8 +89,8 @@ export const useWorkspaceStore = defineStore('workspace', {
       this.backedUpWorkspaceId = ''
       this.readWorkspaces()
     },
-    findWorkspacePath(currentWorkspaceId: string) {
-      const find = (workspace: Workspace, parents: Workspace[]) => {
+    findWorkspacePath(currentWorkspaceId) {
+      const find = (workspace, parents) => {
         if (currentWorkspaceId === workspace.id) {
           this.currentWorkspacePath = [...parents, workspace]
         }
@@ -132,16 +107,7 @@ export const useWorkspaceStore = defineStore('workspace', {
   }
 })
 
-
-// Request function!
-interface RequestOptions {
-  method: 'GET' | 'POST' | 'PUT' | 'DELETE'
-  id?: string
-  body?: {
-    [prop: string]: unknown
-  }
-}
-async function request(options: RequestOptions) {
+async function request(options) {
   const { id = '', method, body } = options
   const res = await fetch(`https://asia-northeast3-heropy-api.cloudfunctions.net/api/notion/workspaces/${id}`, {
     method,

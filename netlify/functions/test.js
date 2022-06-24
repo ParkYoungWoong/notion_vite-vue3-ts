@@ -1,6 +1,4 @@
-import { Handler } from '@netlify/functions'
-
-const handler: Handler = async (event, context) => {
+const handler = async (event, context) => {
   console.log('event, context:', event, context)
   return {
     statusCode: 200,

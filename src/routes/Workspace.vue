@@ -44,12 +44,11 @@
   </section>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script>
 import { mapStores } from 'pinia'
 import { useWorkspaceStore } from '~/store/workspace'
 
-export default defineComponent({
+export default {
   data() {
     return {
       loading: true
@@ -58,7 +57,7 @@ export default defineComponent({
   computed: {
     ...mapStores(useWorkspaceStore),
     currentWorkspaceId() {
-      return this.$route.params.id as string
+      return this.$route.params.id
     }
   },
   watch: {
@@ -74,22 +73,22 @@ export default defineComponent({
   },
   methods: {
     triggerInput() {
-      (this.$refs.inputPoster as HTMLInputElement).dispatchEvent(new MouseEvent('click'))
+      (this.$refs.inputPoster).dispatchEvent(new MouseEvent('click'))
     },
-    enterHandler(event: KeyboardEvent) {
+    enterHandler(event) {
       if (event.isComposing) return // 한글 중복 입력에 대한 버그 방지
-      (this.$refs.content as HTMLParagraphElement).focus()
+      (this.$refs.content).focus()
     },
-    async onInput(type: 'title' | 'content') {
-      const titleEl = this.$refs.title as HTMLHeadingElement
-      const contentEl = this.$refs.content as HTMLParagraphElement
-      const title = titleEl.textContent as string
+    async onInput(type) {
+      const titleEl = this.$refs.title
+      const contentEl = this.$refs.content
+      const title = titleEl.textContent
       const content = contentEl.innerHTML
 
       if (!title.trim()) {
         titleEl.innerHTML = ''
       }
-      if (!(contentEl.textContent as string).trim()) {
+      if (!contentEl.textContent.trim()) {
         contentEl.innerHTML = ''
       }
       // 변경된 데이터가 없으면, 서버로 요청하지 않음!
@@ -103,8 +102,8 @@ export default defineComponent({
       })
       this.workspaceStore.findWorkspacePath(this.currentWorkspaceId)
     },
-    selectPoster(event: Event) {
-      const files = (event.target as HTMLInputElement).files as FileList
+    selectPoster(event) {
+      const files = event.target.files
 
       for (let i = 0; i < files.length; i += 1) {
         const file = files[i]
@@ -114,7 +113,7 @@ export default defineComponent({
           this.loading = true
           await this.workspaceStore.updateWorkspace({
             id: this.currentWorkspaceId,
-            poster: (e.target as FileReader).result as string // base64
+            poster: e.target.result // base64
           })
           // 워크스페이스의 이미지(poster)를 브라우저에서 로드할 때까지 더 기다림!
           // poster는 null일 수 있음!
@@ -133,11 +132,11 @@ export default defineComponent({
       // 포스터를 정상적으로 삭제한 후,
       // input[type="file"] 요소가 가진 기존 파일 값을 초기화!
       if (this.workspaceStore.workspace.poster === null) {
-        (this.$refs.inputPoster as HTMLInputElement).value = ''
+        this.$refs.inputPoster.value = ''
       }
     }
   }
-})
+}
 </script>
 
 <style scoped lang="scss">

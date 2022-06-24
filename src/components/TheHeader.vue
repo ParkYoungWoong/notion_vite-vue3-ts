@@ -26,16 +26,15 @@
   </header>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script>
 import { mapStores } from 'pinia'
 import { useWorkspaceStore } from '~/store/workspace'
 
-export default defineComponent({
+export default {
   computed: {
     ...mapStores(useWorkspaceStore),
     currentWorkspaceId() {
-      return this.$route.params.id as string
+      return this.$route.params.id
     }
   },
   watch: {
@@ -47,7 +46,7 @@ export default defineComponent({
       this.workspaceStore.findWorkspacePath(this.currentWorkspaceId)
     }
   }
-})
+}
 </script>
 
 <style lang="scss" scoped>

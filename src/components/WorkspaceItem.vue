@@ -45,12 +45,11 @@
   </li>
 </template> 
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script>
 import { mapStores } from 'pinia'
 import { useWorkspaceStore } from '~/store/workspace'
 
-export default defineComponent({
+export default {
   props: {
     workspace: {
       type: Object,
@@ -96,7 +95,7 @@ export default defineComponent({
       }
     }
   }
-})
+}
 </script>
 
 <style lang="scss" scoped>

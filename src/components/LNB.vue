@@ -40,14 +40,13 @@
   </nav>
 </template>
 
-<script lang="ts">
+<script>
 import interact from 'interactjs'
-import { defineComponent } from 'vue'
 import { mapStores } from 'pinia'
 import { useWorkspaceStore } from '~/store/workspace'
 import WorkspaceItem from '~/components/WorkspaceItem.vue'
 
-export default defineComponent({
+export default {
   components: {
     WorkspaceItem
   },
@@ -67,10 +66,10 @@ export default defineComponent({
   },
   methods: {
     resizeInit() {
-      interact(this.$refs.nav as HTMLElement)
+      interact(this.$refs.nav)
         .resizable({
           edges: {
-            right: this.$refs.resizeHandle as HTMLDivElement
+            right: this.$refs.resizeHandle
           }
         })
         .on('resizemove', event => {
@@ -78,7 +77,7 @@ export default defineComponent({
         })
     }
   }
-})
+}
 </script>
 
 <style scoped lang="scss">

@@ -20,10 +20,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
+<script>
+export default {
   props: {
     loading: {
       type: Boolean,
@@ -54,7 +52,7 @@ export default defineComponent({
       default: false
     }
   }
-})
+}
 </script>
 
 <style lang="scss" scoped>

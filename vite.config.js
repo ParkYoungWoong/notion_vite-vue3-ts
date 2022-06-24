@@ -22,7 +22,7 @@ export default defineConfig({
           @use "sass:string";
           @import "~/scss/variables";
         `
-      }      
+      }
     }
   },
   server: {

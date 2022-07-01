@@ -20,39 +20,35 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  props: {
-    loading: {
-      type: Boolean,
-      default: true
-    },
-    padding: {
-      type: String,
-      default: '0'
-    },
-    size: {
-      type: Number,
-      default: 22
-    },
-    width: {
-      type: Number,
-      default: 3
-    },
-    color: {
-      type: String,
-      default: '#F86A05'
-    },
-    absolute: {
-      type: Boolean,
-      default: false
-    },
-    fixed: {
-      type: Boolean,
-      default: false
-    }
+<script setup lang="ts">
+defineProps({
+  loading: {
+    type: Boolean,
+    default: true
+  },
+  padding: {
+    type: String,
+    default: '0'
+  },
+  size: {
+    type: Number,
+    default: 22
+  },
+  width: {
+    type: Number,
+    default: 3
+  },
+  color: {
+    type: String,
+    default: '#F86A05'
+  },
+  absolute: {
+    type: Boolean,
+    default: false
+  },
+  fixed: {
+    type: Boolean,
+    default: false
   }
 })
 </script>

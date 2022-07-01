@@ -45,58 +45,51 @@
   </li>
 </template> 
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { mapStores } from 'pinia'
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useWorkspaceStore } from '~/store/workspace'
 
-export default defineComponent({
-  props: {
-    workspace: {
-      type: Object,
-      required: true
-    },
-    depth: {
-      type: Number,
-      default: 0
-    }
+const route = useRoute()
+const router = useRouter()
+const workspaceStore = useWorkspaceStore()
+
+const props = defineProps({
+  workspace: {
+    type: Object,
+    required: true
   },
-  data() {
-    return {
-      showChildren: false
-    }
-  },
-  computed: {
-    ...mapStores(useWorkspaceStore)
-  },
-  watch: {
-    $route() {
-      this.openChildren()
-    }
-  },
-  created() {
-    this.openChildren()
-  },
-  methods: {
-    openChildren() {
-      this.showChildren = this.workspaceStore.currentWorkspacePath.some(workspace => workspace.id === this.workspace.id) 
-        ? true
-        : this.showChildren // 다른 워크스페이스 항목이 닫히지 않도록, 원래 값으로 다시 할당!
-    },
-    async createWorkspace() {
-      await this.workspaceStore.createWorkspace({ 
-        parentId: this.workspace.id 
-      })
-      this.showChildren = true
-    },
-    async deleteWorkspace() {
-      await this.workspaceStore.deleteWorkspace(this.workspace.id)
-      if (this.workspace.id === this.$route.params.id) {
-        this.$router.push(`/workspaces/${this.workspaceStore.workspaces[0].id}`)
-      }
-    }
+  depth: {
+    type: Number,
+    default: 0
   }
 })
+
+const showChildren = ref(false)
+
+watch(route, () => {
+  openChildren()
+})
+
+openChildren()
+
+function openChildren() {
+  showChildren.value = workspaceStore.currentWorkspacePath.some(w => w.id === props.workspace.id) 
+    ? true
+    : showChildren.value // 다른 워크스페이스 항목이 닫히지 않도록, 원래 값으로 다시 할당!
+}
+async function createWorkspace() {
+  await workspaceStore.createWorkspace({ 
+    parentId: props.workspace.id 
+  })
+  showChildren.value = true
+}
+async function deleteWorkspace() {
+  await workspaceStore.deleteWorkspace(props.workspace.id)
+  if (props.workspace.id === route.params.id) {
+    router.push(`/workspaces/${workspaceStore.workspaces[0].id}`)
+  }
+}
 </script>
 
 <style lang="scss" scoped>

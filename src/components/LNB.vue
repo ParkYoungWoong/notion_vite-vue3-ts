@@ -40,45 +40,34 @@
   </nav>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import interact from 'interactjs'
-import { defineComponent } from 'vue'
-import { mapStores } from 'pinia'
+import { ref, Ref, onMounted } from 'vue'
 import { useWorkspaceStore } from '~/store/workspace'
 import WorkspaceItem from '~/components/WorkspaceItem.vue'
 
-export default defineComponent({
-  components: {
-    WorkspaceItem
-  },
-  data() {
-    return {
-      navWidth: 260
-    }
-  },
-  computed: {
-    ...mapStores(useWorkspaceStore)
-  }, 
-  created() {
-    this.workspaceStore.readWorkspaces()
-  },
-  mounted() {
-    this.resizeInit()
-  },
-  methods: {
-    resizeInit() {
-      interact(this.$refs.nav as HTMLElement)
-        .resizable({
-          edges: {
-            right: this.$refs.resizeHandle as HTMLDivElement
-          }
-        })
-        .on('resizemove', event => {
-          this.navWidth = event.rect.width
-        })
-    }
-  }
+const workspaceStore = useWorkspaceStore()
+
+const navWidth = ref(260)
+const nav: Ref<HTMLElement | null> = ref(null)
+const resizeHandle: Ref<HTMLDivElement | null> = ref(null)
+workspaceStore.readWorkspaces()
+
+onMounted(() => {
+  resizeInit()
 })
+
+function resizeInit() {
+  interact(nav.value as HTMLElement)
+    .resizable({
+      edges: {
+        right: resizeHandle.value as HTMLDivElement
+      }
+    })
+    .on('resizemove', event => {
+      navWidth.value = event.rect.width
+    })
+}
 </script>
 
 <style scoped lang="scss">

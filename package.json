@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
     "interactjs": "^1.10.14",
     "pinia": "^2.0.14",
     "vue": "^3.2.25",

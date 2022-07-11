@@ -48,7 +48,7 @@ const handler: Handler = async event => {
           ${
             NODE_ENV === 'development' 
               ? '<script defer type="module" src="/src/main.ts"></script>'
-              : '<script type="module" crossorigin src="/assets/index.2d56ede1.js"></script><link rel="stylesheet" href="/assets/index.006a7ba0.css">'
+              : '<script type="module" crossorigin src="/assets/index.js"></script><link rel="stylesheet" href="/assets/index.css">'
           }
         </head>
         <body>

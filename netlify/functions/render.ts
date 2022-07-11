@@ -1,7 +1,7 @@
 import { Handler } from '@netlify/functions'
 import axios from 'axios'
 
-const { APIKEY, USERNAME } = process.env
+const { APIKEY, USERNAME, NODE_ENV } = process.env
 
 const handler: Handler = async event => {
   // console.log('event.path::', event.path)
@@ -45,12 +45,17 @@ const handler: Handler = async event => {
           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
           <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          ${
+            NODE_ENV === 'development' 
+              ? '<script defer type="module" src="/src/main.ts"></script>'
+              : '<script type="module" crossorigin src="/assets/index.2d56ede1.js"></script><link rel="stylesheet" href="/assets/index.006a7ba0.css">'
+          }
         </head>
         <body>
           <div id="app">
             <!-- <App /> -->
           </div>
-          <script type="module" src="/src/main.ts"></script>
+          
         </body>
       </html>`
   }

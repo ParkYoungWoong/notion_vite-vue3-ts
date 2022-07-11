@@ -2,7 +2,7 @@
   targetPort = 2999 # 연결할 프로젝트 개발 서버의 포트를 지정합니다.
   port = 3000 # 출력할 Netlify 서버의 포트를 지정합니다.
 
-# [[redirects]]
-#   from = '/*'
-#   to = '/.netlify/functions/render'
-#   status = 200
+[[redirects]]
+  from = '/*'
+  to = '/index.html'
+  status = 200

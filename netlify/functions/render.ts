@@ -4,19 +4,20 @@ import axios from 'axios'
 const { APIKEY, USERNAME, NODE_ENV } = process.env
 
 const handler: Handler = async event => {
-  // console.log('event.path::', event.path)
-  // '/workspaces/AWEUIRJLASJKNFaskdhjbfksj'
-  // params => ['workspaces', 'AWEUIRJLASJKNFaskdhjbfksj']
-  const params = event.path.split('/').filter(p => p)
-  const { data } = await axios({
-    url: `https://asia-northeast3-heropy-api.cloudfunctions.net/api/notion/workspaces/${params[1]}`,
-    method: 'GET',
-    headers: {
-      'content-type': 'application/json',
-      'apikey': APIKEY as string,
-      'username': USERNAME as string
-    }
-  })
+  let data
+  const [, id] = event.path.split('/').filter(p => p)
+  if (id) {
+    const res = await axios({
+      url: `https://asia-northeast3-heropy-api.cloudfunctions.net/api/notion/workspaces/${id}`,
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        'apikey': APIKEY as string,
+        'username': USERNAME as string
+      }
+    })
+    data = res.data
+  }
   const { title, content, poster } = data
 
   return {
@@ -37,7 +38,7 @@ const handler: Handler = async event => {
           <meta property="og:title" content="${title}" />
           <meta property="og:description" content="${content}" />
           <meta property="og:image" content="${poster}" />
-          <meta property="og:url" content="https://charming-moonbeam-67283c.netlify.app/${params[1]}" />
+          <meta property="og:url" content="https://charming-moonbeam-67283c.netlify.app/${id}" />
 
           <link rel="icon" href="https://heropy.blog/css/images/logo.png">
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
@@ -52,10 +53,7 @@ const handler: Handler = async event => {
           }
         </head>
         <body>
-          <div id="app">
-            <!-- <App /> -->
-          </div>
-          
+          <div id="app"></div>
         </body>
       </html>`
   }

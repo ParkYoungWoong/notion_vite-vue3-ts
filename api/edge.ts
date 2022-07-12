@@ -1,15 +1,16 @@
 import axios from 'axios'
+import isbot from 'isbot'
 import { VercelRequest, VercelResponse } from '@vercel/node'
 
 const { APIKEY, USERNAME } = process.env
 
 export default async function handler(request: VercelRequest, response: VercelResponse) {
   console.log(request)
-  // const userAgent = request.headers['user-agent']
+  const userAgent = request.headers['user-agent']
   const id = (request.url as string).split('/').filter(p => p).reverse()[0]
   console.log(id)
 
-  if (id) {
+  if (isbot(userAgent) && id) {
     console.log('Bot!!')
 
     const { data } = await axios({

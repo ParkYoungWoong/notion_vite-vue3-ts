@@ -144,7 +144,7 @@ interface RequestOptions {
 async function request(options: RequestOptions) {
   const { id = '', method, body } = options
   
-  const res = await fetch('/.netlify/functions/workspace', {
+  const res = await fetch('/.netlify/functions/workspaces', {
     method: 'POST',
     body: JSON.stringify({
       id,

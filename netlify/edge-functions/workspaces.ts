@@ -1,18 +1,19 @@
-import axiod from 'https://deno.land/x/axiod/mod.ts'
 import isbot from 'https://cdn.skypack.dev/isbot'
 import { Context } from 'netlify:edge'
 
+const APIKEY = Deno.env.get('APIKEY') as string
+const USERNAME = Deno.env.get('USERNAME') as string
+
 export default async (request: Request, context: Context) => {
-  const APIKEY = Deno.env.get('APIKEY') as string
-  const USERNAME = Deno.env.get('USERNAME') as string
   const userAgent = request.headers.get('user-agent')
-  const id = request.url.split('/').at(-1)
-  console.log('id:', id)
+  const id = request.url.split('/').filter(p => p).reverse()[0]
+  console.log(id)
   
-  let data
-  if (id) {
-    const res = await axiod({
-      url: `https://asia-northeast3-heropy-api.cloudfunctions.net/api/notion/workspaces/${id}`,
+  if (isbot(userAgent) && id) {
+    console.log('Bot!!')
+
+    // `fetch`는 Deno에 내장되어 있습니다.
+    const res = await fetch(`https://asia-northeast3-heropy-api.cloudfunctions.net/api/notion/workspaces/${id}`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -20,12 +21,8 @@ export default async (request: Request, context: Context) => {
         'username': USERNAME
       }
     })
-    data = res.data
-  }
-  const { title, content, poster } = data
+    const { title, content, poster } = await res.json()
 
-  if (isbot(userAgent)) {
-    console.log('bot!!')
     return new Response(
       /* html */ `
         <!DOCTYPE html>

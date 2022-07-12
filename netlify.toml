@@ -9,7 +9,7 @@
 
 [[edge_functions]]
   path = "/workspaces/*"
-  function = "edge"
+  function = "workspaces"
 
 [[redirects]]
   from = "/*"

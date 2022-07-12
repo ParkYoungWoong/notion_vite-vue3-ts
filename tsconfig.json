@@ -21,9 +21,7 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue",
-    "netlify/**/*.ts",
-    "netlify/**/*.d.ts",
+    "src/**/*.vue"
   ],
   "references": [
     { "path": "./tsconfig.node.json" }

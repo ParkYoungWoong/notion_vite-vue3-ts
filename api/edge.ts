@@ -7,7 +7,7 @@ const { APIKEY, USERNAME, MODE } = process.env
 export default async function handler(request: VercelRequest, response: VercelResponse) {
   // console.log(request)
   const userAgent = request.headers['user-agent']
-  const id = (request.url as string).split('/').filter(p => p).reverse()[0]
+  const id = (request.url as string).split('/').filter(p => p).reverse()[0].split('?')[0]
   console.log(id)
 
   if (isbot(userAgent) && id) {
@@ -54,7 +54,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
   }
 
   const url = MODE === 'development'
-    ? 'http://localhost:5009/index.html'
-    : '/index.html'
+    ? `http://localhost:5009/workspaces/${id}`
+    : `/workspaces/${id}`
   return response.redirect(url)
 }

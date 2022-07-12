@@ -1,6 +1,5 @@
 {
   "rewrites": [
-    { "source": "/workspaces/:path*", "destination": "/api/edge" },
-    { "source": "/:path*", "destination": "/index.html" }
+    { "source": "/:path*", "destination": "/api/edge" }
   ]
 }

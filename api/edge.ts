@@ -2,10 +2,10 @@ import axios from 'axios'
 import isbot from 'isbot'
 import { VercelRequest, VercelResponse } from '@vercel/node'
 
-const { APIKEY, USERNAME } = process.env
+const { APIKEY, USERNAME, MODE } = process.env
 
 export default async function handler(request: VercelRequest, response: VercelResponse) {
-  console.log(request)
+  // console.log(request)
   const userAgent = request.headers['user-agent']
   const id = (request.url as string).split('/').filter(p => p).reverse()[0]
   console.log(id)
@@ -53,10 +53,8 @@ export default async function handler(request: VercelRequest, response: VercelRe
       `)
   }
 
-  return response.redirect('/index.html')
-}
-
-// For Edge!
-export const config = {
-  runtime: 'experimental-edge'
+  const url = MODE === 'development'
+    ? 'http://localhost:5009/index.html'
+    : '/index.html'
+  return response.redirect(url)
 }

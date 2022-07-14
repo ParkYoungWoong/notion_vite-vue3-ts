@@ -2,13 +2,13 @@ import axios from 'axios'
 import isbot from 'isbot'
 import { VercelRequest, VercelResponse } from '@vercel/node'
 
+// Check .env file!
 const { APIKEY, USERNAME, MODE } = process.env
 
 export default async function handler(request: VercelRequest, response: VercelResponse) {
   const userAgent = request.headers['user-agent']
   const id = (request.url as string).split('/').filter(p => p).reverse()[0].split('?')[0]
-  const path = (request.url as string).split('?')[0]
-  console.log(id, path)
+  console.log(id)
 
   let data = { 
     title: 'Heropy가 운영하는 노션', 
@@ -48,14 +48,14 @@ export default async function handler(request: VercelRequest, response: VercelRe
           <meta property="og:title" content="${title}" />
           <meta property="og:description" content="${content}" />
           <meta property="og:image" content="${poster}" />
-          <meta property="og:url" content="https://notion-vite-vue3-ts.vercel.app//workspaces${path}" />
+          <meta property="og:url" content="https://notion-vite-vue3-ts.vercel.app/workspaces/${id}" />
 
           <meta property="twitter:card" content="summary" />
           <meta property="twitter:site" content="Notion Clone!" />
           <meta property="twitter:title" content="${title}" />
           <meta property="twitter:description" content="${content}" />
           <meta property="twitter:image" content="${poster}" />
-          <meta property="twitter:url" content="https://notion-vite-vue3-ts.vercel.app//workspaces${path}" />
+          <meta property="twitter:url" content="https://notion-vite-vue3-ts.vercel.app/workspaces/${id}" />
 
           <link rel="icon" href="https://heropy.blog/css/images/logo.png">
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">

@@ -3,11 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently npm:watch-*",
+    "watch-dev": "vite",
+    "watch-vercel": "vercel dev --listen 2999",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "netlify": "netlify dev",
-    "vercel": "vercel dev"
+    "netlify": "netlify dev"
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -24,6 +25,7 @@
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
     "@vitejs/plugin-vue": "^2.3.3",
+    "concurrently": "^7.2.2",
     "eslint": "^8.17.0",
     "eslint-plugin-vue": "^9.1.0",
     "netlify-cli": "^10.5.1",

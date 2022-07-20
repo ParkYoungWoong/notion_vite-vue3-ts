@@ -143,8 +143,11 @@ interface RequestOptions {
 }
 async function request(options: RequestOptions) {
   const { id = '', method, body } = options
+  const host = import.meta.env.PROD
+    ? ''
+    : 'http://localhost:3000'
   
-  const res = await fetch('/.netlify/functions/workspaces', {
+  const res = await fetch(`${host}/.netlify/functions/workspaces`, {
     method: 'POST',
     body: JSON.stringify({
       id,

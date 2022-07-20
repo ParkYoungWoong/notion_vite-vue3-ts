@@ -16,3 +16,8 @@
   to = "/index.html"
   status = 200
   
+# Storybook 요청 처리
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "http://localhost:6006"

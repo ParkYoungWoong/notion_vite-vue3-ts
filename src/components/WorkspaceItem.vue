@@ -75,6 +75,7 @@ export default defineComponent({
     }
   },
   created() {
+    console.log(1)
     this.openChildren()
   },
   methods: {
@@ -84,7 +85,7 @@ export default defineComponent({
         : this.showChildren // 다른 워크스페이스 항목이 닫히지 않도록, 원래 값으로 다시 할당!
     },
     async createWorkspace() {
-      await this.workspaceStore.createWorkspace({ 
+      await this.workspaceStore.createWorkspace({
         parentId: this.workspace.id 
       })
       this.showChildren = true

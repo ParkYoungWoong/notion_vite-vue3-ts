@@ -6,7 +6,9 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "netlify": "netlify dev"
+    "netlify": "netlify dev",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -18,17 +20,27 @@
     "vue-router": "^4.0.16"
   },
   "devDependencies": {
+    "@babel/core": "^7.18.9",
     "@netlify/functions": "^1.0.0",
+    "@storybook/addon-actions": "^6.5.9",
+    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-interactions": "^6.5.9",
+    "@storybook/addon-links": "^6.5.9",
+    "@storybook/builder-vite": "^0.2.0",
+    "@storybook/testing-library": "0.0.13",
+    "@storybook/vue3": "^6.5.9",
     "@types/node": "^18.0.3",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
-    "@vitejs/plugin-vue": "^2.3.3",
+    "@vitejs/plugin-vue": "^3.0.1",
+    "babel-loader": "^8.2.5",
     "eslint": "^8.17.0",
     "eslint-plugin-vue": "^9.1.0",
     "netlify-cli": "^10.5.1",
     "sass": "^1.52.3",
     "typescript": "^4.7.2",
-    "vite": "^2.9.12",
-    "vue-tsc": "^0.34.7"
+    "vite": "^3.0.2",
+    "vue-loader": "^16.8.3",
+    "vue-tsc": "^0.34.17"
   }
 }

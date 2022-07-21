@@ -1,5 +1,5 @@
 # 노션 클론
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/5ef74e2a-1966-4fe9-ab52-b3f43beb2e10/deploy-status)](https://app.netlify.com/sites/charming-moonbeam-67283c/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/54adcd30-dfc7-441d-b5c1-e635a7d859e8/deploy-status)](https://app.netlify.com/sites/enchanting-bublanina-4dd5c6/deploys)
 
-[DEMO](https://charming-moonbeam-67283c.netlify.app/)
+[DEMO](https://enchanting-bublanina-4dd5c6.netlify.app/workspaces)

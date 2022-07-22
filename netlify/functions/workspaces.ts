@@ -7,6 +7,7 @@ const { APIKEY, USERNAME } = process.env
 
 const handler: Handler = async event => {
   const { id, method, data } = JSON.parse(event.body as string)
+  console.log(id, method, data)
   const { data: returnValue } = await axios({
     url: `https://asia-northeast3-heropy-api.cloudfunctions.net/api/notion/workspaces/${id}`,
     method,

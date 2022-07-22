@@ -73,7 +73,7 @@ export const useWorkspaceStore = defineStore('workspace', {
       this.workspace = workspace
     },
     // U
-    async updateWorkspace(payload: WorkspaceParamsForUpdate) {
+    async updateWorkspace(payload: WorkspaceParamsForUpdate = {}) {
       const { id, title, content, poster, parentId } = payload
       const updatedWorkspace = await request({
         id,
@@ -146,8 +146,9 @@ async function request(options: RequestOptions) {
   const host = import.meta.env.PROD
     ? ''
     : 'http://localhost:3000'
+  console.log(host)
   
-  const res = await fetch(`${host}/.netlify/functions/workspaces`, {
+  const res = await fetch('/.netlify/functions/workspaces', {
     method: 'POST',
     body: JSON.stringify({
       id,

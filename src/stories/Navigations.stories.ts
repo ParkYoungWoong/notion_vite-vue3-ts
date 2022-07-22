@@ -3,7 +3,6 @@ import TheHeader from '~/components/TheHeader.vue'
 
 export default {
   title: 'Notion/LNB',
-  component: LNB,
   parameters: {
     layout: 'fullscreen'
   }

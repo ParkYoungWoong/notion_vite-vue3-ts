@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
@@ -22,7 +24,7 @@ export default defineConfig({
           @use "sass:string";
           @import "~/scss/variables";
         `
-      }      
+      }
     }
   },
   server: {
@@ -36,5 +38,10 @@ export default defineConfig({
         assetFileNames: 'assets/[name].[ext]'
       }
     }
+  },
+  test: {
+    environment: 'jsdom',
+    reporters: ['verbose'],
+    include: ['tests/unit/*.{test,spec}.{js,ts}']
   }
 })

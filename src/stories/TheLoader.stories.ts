@@ -2,7 +2,6 @@ import TheLoader from '~/components/TheLoader.vue'
 
 export default {
   title: 'Notion/TheLoader',
-  component: TheLoader,
   parameters: {
     layout: 'centered'
   }

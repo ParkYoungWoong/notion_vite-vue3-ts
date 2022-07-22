@@ -75,7 +75,6 @@ export default defineComponent({
     }
   },
   created() {
-    console.log(1)
     this.openChildren()
   },
   methods: {

@@ -1,10 +1,10 @@
 <template>
   <div
     v-if="loading"
-    :style="{ 
+    :style="{
       width: `${size}px`,
       height: `${size}px`,
-      padding 
+      padding
     }"
     :class="{
       absolute,
@@ -52,6 +52,17 @@ export default defineComponent({
     fixed: {
       type: Boolean,
       default: false
+    }
+  },
+  // For unit test!
+  data() {
+    return {
+      a: 1
+    }
+  },
+  methods: {
+    b() {
+      return 'B!'
     }
   }
 })

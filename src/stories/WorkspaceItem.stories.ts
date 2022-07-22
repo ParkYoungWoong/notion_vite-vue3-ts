@@ -2,7 +2,6 @@ import WorkspaceItem from '~/components/WorkspaceItem.vue'
 
 export default {
   title: 'Notion/WorkspaceItem',
-  component: WorkspaceItem,
   parameters: {
     layout: 'fullscreen'
   }
@@ -12,7 +11,7 @@ const propsSample = {
   title: 'Hello world?!'
 }
 
-export const Primary = () => ({
+export const PrimaryItem = () => ({
   components: {
     WorkspaceItem
   },
@@ -29,7 +28,7 @@ export const Primary = () => ({
   `
 })
 
-export const Children = () => ({
+export const ChildItem = () => ({
   components: {
     WorkspaceItem
   },
